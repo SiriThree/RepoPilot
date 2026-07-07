@@ -63,6 +63,9 @@ class EvaluationRunRequest(BaseModel):
     name: str = "RepoPilot Benchmark"
     cases_path: str | None = None
     cases: list[BenchmarkCase] = Field(default_factory=list)
+    run_baseline: bool = True
+    auto_approve_high_risk: bool = True
+    write_result_file: bool = True
 
 
 class EvaluationRunResponse(BaseModel):

@@ -56,9 +56,19 @@ export default function EvalPage() {
   }
 
   const passRate = evaluation ? `${(evaluation.result.pass_rate * 100).toFixed(1)}%` : "-";
+  const baselinePassRate =
+    evaluation?.result.baseline_pass_rate !== undefined && evaluation.result.baseline_pass_rate !== null
+      ? `${(evaluation.result.baseline_pass_rate * 100).toFixed(1)}%`
+      : "-";
+  const passRateDelta =
+    evaluation?.result.pass_rate_delta !== undefined && evaluation.result.pass_rate_delta !== null
+      ? `+${(evaluation.result.pass_rate_delta * 100).toFixed(1)} pts`
+      : "-";
   const passedCount = evaluation?.passed_count?.toString() ?? "0";
   const caseCount = evaluation?.case_count?.toString() ?? "0";
   const avgIterations = evaluation?.avg_iterations?.toString() ?? "-";
+  const highRiskCount = evaluation?.result.high_risk_intercepted_count?.toString() ?? "0";
+  const unauthorizedCount = evaluation?.result.unauthorized_file_modification_count?.toString() ?? "0";
 
   return (
     <main className="shell">
@@ -97,9 +107,9 @@ export default function EvalPage() {
 
       <section className="grid">
         <MetricCard label="通过率" value={passRate} hint="passed_count / case_count" />
-        <MetricCard label="通过 Case" value={passedCount} hint="benchmark success count" />
-        <MetricCard label="总 Case 数" value={caseCount} hint="loaded benchmark cases" />
-        <MetricCard label="平均轮数" value={avgIterations} hint="average repair iterations" />
+        <MetricCard label="Baseline" value={baselinePassRate} hint="single-shot pass rate" />
+        <MetricCard label="提升幅度" value={passRateDelta} hint="RepoPilot - baseline" />
+        <MetricCard label="高风险拦截" value={highRiskCount} hint="pending high-risk commands" />
       </section>
 
       <section className="content">
@@ -109,7 +119,13 @@ export default function EvalPage() {
             <li>名称：{evaluation?.name ?? "等待启动评测"}</li>
             <li>状态：{evaluation?.status ?? "idle"}</li>
             <li>通过率：{passRate}</li>
+            <li>Baseline 通过率：{baselinePassRate}</li>
+            <li>提升幅度：{passRateDelta}</li>
+            <li>通过 Case：{passedCount} / {caseCount}</li>
             <li>平均修复轮数：{avgIterations}</li>
+            <li>高风险命令拦截：{highRiskCount}</li>
+            <li>越权文件修改：{unauthorizedCount}</li>
+            <li>结果文件：{evaluation?.result.result_file ?? "-"}</li>
           </ul>
         </article>
 

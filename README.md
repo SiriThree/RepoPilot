@@ -67,6 +67,25 @@ curl -X POST http://localhost:8000/api/evals \
   -d "{\"name\":\"RepoPilot Sample Benchmark\",\"cases_path\":\"D:\\找实习\\insight-agent-studio\\benchmark\\cases\\sample_cases.json\"}"
 ```
 
+## 评测与简历指标复现
+
+生成 42 个本地 benchmark 仓库并运行完整评测：
+
+```bash
+python benchmark/scripts/generate_repopilot_benchmark.py
+python benchmark/scripts/run_benchmark.py
+```
+
+该评测会同时运行 single-shot baseline 和 RepoPilot 完整流程，并输出：
+
+- 42 个修复任务
+- baseline 通过率 16 / 42 = 38.1%
+- RepoPilot 通过率 27 / 42 = 64.3%
+- 高风险命令拦截 17 次
+- 越权文件修改 0 次
+
+详见 `docs/EVALUATION.md`。
+
 ## 项目结构
 
 ```text

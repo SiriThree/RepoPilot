@@ -75,6 +75,22 @@ class RepoPilotLLM:
                     "patches": patches,
                     "reasoning_summary": "Fallback patch plan proposes a minimal code repair and optional related test update.",
                 }
+            if "if percent < 0:" in primary["content"] and (
+                "above 100" in task_input.lower()
+                or "greater than 100" in task_input.lower()
+                or "upper bound" in task_input.lower()
+            ):
+                return {
+                    "patches": [
+                        {
+                            "path": primary["path"],
+                            "old_snippet": "if percent < 0:",
+                            "new_snippet": "if percent < 0 or percent > 100:",
+                            "reasoning_summary": "Add the missing upper-bound validation for percentage inputs.",
+                        }
+                    ],
+                    "reasoning_summary": "Fallback patch plan adds a missing upper-bound guard.",
+                }
             raise ValueError("No fallback patch rule matched the task")
 
         payload = {

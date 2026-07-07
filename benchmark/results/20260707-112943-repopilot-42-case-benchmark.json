@@ -1,0 +1,1322 @@
+{
+  "pass_rate": 0.6429,
+  "baseline_pass_rate": 0.381,
+  "pass_rate_delta": 0.2619,
+  "high_risk_intercepted_count": 17,
+  "unauthorized_file_modification_count": 0,
+  "failure_breakdown": {
+    "patch_generation_failed": 15
+  },
+  "failed_phase_breakdown": {
+    "act": 15
+  },
+  "failed_command_breakdown": {
+    "python -m pytest -q": 15
+  },
+  "cases": [
+    {
+      "name": "zero_boundary_fix_001",
+      "run_id": "2af2791a-03d6-4469-9974-2981a2d3f617",
+      "repo_path": "benchmark/generated/repos/case_001",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 1,
+      "baseline": {
+        "success": true,
+        "tests_passed": true,
+        "patch_applied": true,
+        "patch_error": "",
+        "files_changed": [
+          "src/calculator.py"
+        ],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 0
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "zero_boundary_fix_002",
+      "run_id": "2250ce6a-a087-411d-9a9d-4eb93d352c35",
+      "repo_path": "benchmark/generated/repos/case_002",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 1,
+      "baseline": {
+        "success": true,
+        "tests_passed": true,
+        "patch_applied": true,
+        "patch_error": "",
+        "files_changed": [
+          "src/calculator.py"
+        ],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 0
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "zero_boundary_fix_003",
+      "run_id": "b903176a-f31e-4b5c-8382-2ec436d97960",
+      "repo_path": "benchmark/generated/repos/case_003",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 1,
+      "baseline": {
+        "success": true,
+        "tests_passed": true,
+        "patch_applied": true,
+        "patch_error": "",
+        "files_changed": [
+          "src/calculator.py"
+        ],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 0
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "zero_boundary_fix_004",
+      "run_id": "65f9fbfd-9491-4dd9-bd3d-3e8c8c051253",
+      "repo_path": "benchmark/generated/repos/case_004",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 1,
+      "baseline": {
+        "success": true,
+        "tests_passed": true,
+        "patch_applied": true,
+        "patch_error": "",
+        "files_changed": [
+          "src/calculator.py"
+        ],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 0
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "zero_boundary_fix_005",
+      "run_id": "12979303-74b4-4a0f-bbcb-327044a5ecba",
+      "repo_path": "benchmark/generated/repos/case_005",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 1,
+      "baseline": {
+        "success": true,
+        "tests_passed": true,
+        "patch_applied": true,
+        "patch_error": "",
+        "files_changed": [
+          "src/calculator.py"
+        ],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 0
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "zero_boundary_fix_006",
+      "run_id": "8b2e91f0-23f3-4a44-a3c5-7b8e29050532",
+      "repo_path": "benchmark/generated/repos/case_006",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 1,
+      "baseline": {
+        "success": true,
+        "tests_passed": true,
+        "patch_applied": true,
+        "patch_error": "",
+        "files_changed": [
+          "src/calculator.py"
+        ],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 0
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "zero_boundary_fix_007",
+      "run_id": "68235a85-aae0-4fb5-8442-37636cc86512",
+      "repo_path": "benchmark/generated/repos/case_007",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 1,
+      "baseline": {
+        "success": true,
+        "tests_passed": true,
+        "patch_applied": true,
+        "patch_error": "",
+        "files_changed": [
+          "src/calculator.py"
+        ],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 0
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "zero_boundary_fix_008",
+      "run_id": "ddfb10ac-19cc-4222-b68a-dac2a1aad166",
+      "repo_path": "benchmark/generated/repos/case_008",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 1,
+      "baseline": {
+        "success": true,
+        "tests_passed": true,
+        "patch_applied": true,
+        "patch_error": "",
+        "files_changed": [
+          "src/calculator.py"
+        ],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 0
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "zero_boundary_fix_009",
+      "run_id": "9ebb4639-7bdc-4e18-b532-f5239cb76658",
+      "repo_path": "benchmark/generated/repos/case_009",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 1,
+      "baseline": {
+        "success": true,
+        "tests_passed": true,
+        "patch_applied": true,
+        "patch_error": "",
+        "files_changed": [
+          "src/calculator.py"
+        ],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 0
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "zero_boundary_fix_010",
+      "run_id": "4c81523d-7df1-4971-9211-2603789ec193",
+      "repo_path": "benchmark/generated/repos/case_010",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 1,
+      "baseline": {
+        "success": true,
+        "tests_passed": true,
+        "patch_applied": true,
+        "patch_error": "",
+        "files_changed": [
+          "src/calculator.py"
+        ],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 0
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "zero_boundary_fix_011",
+      "run_id": "26f8af8d-1903-4fa7-93ca-15565f5c22ec",
+      "repo_path": "benchmark/generated/repos/case_011",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 1,
+      "baseline": {
+        "success": true,
+        "tests_passed": true,
+        "patch_applied": true,
+        "patch_error": "",
+        "files_changed": [
+          "src/calculator.py"
+        ],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 0
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "zero_boundary_fix_012",
+      "run_id": "f7c21276-eb53-4ae8-a595-b0fe61ef9f24",
+      "repo_path": "benchmark/generated/repos/case_012",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 1,
+      "baseline": {
+        "success": true,
+        "tests_passed": true,
+        "patch_applied": true,
+        "patch_error": "",
+        "files_changed": [
+          "src/calculator.py"
+        ],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 0
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "zero_boundary_fix_013",
+      "run_id": "ed6c5c90-5d89-47be-ad5c-1dbe8989d717",
+      "repo_path": "benchmark/generated/repos/case_013",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 1,
+      "baseline": {
+        "success": true,
+        "tests_passed": true,
+        "patch_applied": true,
+        "patch_error": "",
+        "files_changed": [
+          "src/calculator.py"
+        ],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 0
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "zero_boundary_fix_014",
+      "run_id": "89b75cf0-41c8-43f0-a685-76747ec3d290",
+      "repo_path": "benchmark/generated/repos/case_014",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 1,
+      "baseline": {
+        "success": true,
+        "tests_passed": true,
+        "patch_applied": true,
+        "patch_error": "",
+        "files_changed": [
+          "src/calculator.py"
+        ],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 0
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "zero_boundary_fix_015",
+      "run_id": "05111f8a-9b04-467c-af05-7d8d3dd4cf9f",
+      "repo_path": "benchmark/generated/repos/case_015",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 1,
+      "baseline": {
+        "success": true,
+        "tests_passed": true,
+        "patch_applied": true,
+        "patch_error": "",
+        "files_changed": [
+          "src/calculator.py"
+        ],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 0
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "zero_boundary_fix_016",
+      "run_id": "dae50a78-cf82-4718-a2d9-13555d254b89",
+      "repo_path": "benchmark/generated/repos/case_016",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 1,
+      "baseline": {
+        "success": true,
+        "tests_passed": true,
+        "patch_applied": true,
+        "patch_error": "",
+        "files_changed": [
+          "src/calculator.py"
+        ],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 0
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "percent_upper_bound_fix_017",
+      "run_id": "4e93cf3a-194e-4d1d-b5c0-0f10debc0c80",
+      "repo_path": "benchmark/generated/repos/case_017",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 1,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Install dependencies if needed, then Fix the missing upper bound so percentages above 100 raise ValueError.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "percent_upper_bound_fix_018",
+      "run_id": "a057b0d1-7468-45b5-8d92-e083f5f317d7",
+      "repo_path": "benchmark/generated/repos/case_018",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Fix the missing upper bound so percentages above 100 raise ValueError.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "percent_upper_bound_fix_019",
+      "run_id": "f6172e3a-1fa2-4cc0-9885-417f0888d3fd",
+      "repo_path": "benchmark/generated/repos/case_019",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Fix the missing upper bound so percentages above 100 raise ValueError.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "percent_upper_bound_fix_020",
+      "run_id": "688e92ba-4aa4-49ed-924b-0e17c553f7ff",
+      "repo_path": "benchmark/generated/repos/case_020",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Fix the missing upper bound so percentages above 100 raise ValueError.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "percent_upper_bound_fix_021",
+      "run_id": "4d163a90-57de-42e8-bc9c-e8e912e9bc88",
+      "repo_path": "benchmark/generated/repos/case_021",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Fix the missing upper bound so percentages above 100 raise ValueError.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "percent_upper_bound_fix_022",
+      "run_id": "17a59916-eeea-4b11-ab03-f575d7be8f2c",
+      "repo_path": "benchmark/generated/repos/case_022",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Fix the missing upper bound so percentages above 100 raise ValueError.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "percent_upper_bound_fix_023",
+      "run_id": "6662bcb3-24ac-4b52-9133-56cb9cb04fa7",
+      "repo_path": "benchmark/generated/repos/case_023",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Fix the missing upper bound so percentages above 100 raise ValueError.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "percent_upper_bound_fix_024",
+      "run_id": "f98d3d73-2ac5-4279-b44f-871381b7af1f",
+      "repo_path": "benchmark/generated/repos/case_024",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Fix the missing upper bound so percentages above 100 raise ValueError.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "percent_upper_bound_fix_025",
+      "run_id": "e24907f4-bac9-4904-bb00-e2c7d9a872b1",
+      "repo_path": "benchmark/generated/repos/case_025",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Fix the missing upper bound so percentages above 100 raise ValueError.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "percent_upper_bound_fix_026",
+      "run_id": "d981c57e-6c4a-41b3-9a29-21c9e13c5647",
+      "repo_path": "benchmark/generated/repos/case_026",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Fix the missing upper bound so percentages above 100 raise ValueError.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "percent_upper_bound_fix_027",
+      "run_id": "bedc668f-c31b-4dc1-9bf5-9c039c6517ef",
+      "repo_path": "benchmark/generated/repos/case_027",
+      "success": true,
+      "tests_passed": true,
+      "iterations": 2,
+      "files_changed": [
+        "src/calculator.py"
+      ],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": null,
+      "failed_phase": null,
+      "failed_command": null,
+      "failed_command_risk": null,
+      "summary": "RepoPilot processed task 'Fix the missing upper bound so percentages above 100 raise ValueError.', passed tests, and touched src/calculator.py."
+    },
+    {
+      "name": "unsupported_empty_collection_fix_028",
+      "run_id": "05062163-2737-439b-8bb2-8db6579b6789",
+      "repo_path": "benchmark/generated/repos/case_028",
+      "success": false,
+      "tests_passed": false,
+      "iterations": 0,
+      "files_changed": [],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": "patch_generation_failed",
+      "failed_phase": "act",
+      "failed_command": "python -m pytest -q",
+      "failed_command_risk": "safe_exec",
+      "summary": "Run failed before producing a valid repair."
+    },
+    {
+      "name": "unsupported_empty_collection_fix_029",
+      "run_id": "00687ade-64b4-471c-99a0-d54956d4688a",
+      "repo_path": "benchmark/generated/repos/case_029",
+      "success": false,
+      "tests_passed": false,
+      "iterations": 0,
+      "files_changed": [],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": "patch_generation_failed",
+      "failed_phase": "act",
+      "failed_command": "python -m pytest -q",
+      "failed_command_risk": "safe_exec",
+      "summary": "Run failed before producing a valid repair."
+    },
+    {
+      "name": "unsupported_empty_collection_fix_030",
+      "run_id": "9555ee74-5855-46dc-8756-7c20fcd85ffe",
+      "repo_path": "benchmark/generated/repos/case_030",
+      "success": false,
+      "tests_passed": false,
+      "iterations": 0,
+      "files_changed": [],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": "patch_generation_failed",
+      "failed_phase": "act",
+      "failed_command": "python -m pytest -q",
+      "failed_command_risk": "safe_exec",
+      "summary": "Run failed before producing a valid repair."
+    },
+    {
+      "name": "unsupported_empty_collection_fix_031",
+      "run_id": "d7dd3506-12e6-4247-9023-24fa38cb4974",
+      "repo_path": "benchmark/generated/repos/case_031",
+      "success": false,
+      "tests_passed": false,
+      "iterations": 0,
+      "files_changed": [],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": "patch_generation_failed",
+      "failed_phase": "act",
+      "failed_command": "python -m pytest -q",
+      "failed_command_risk": "safe_exec",
+      "summary": "Run failed before producing a valid repair."
+    },
+    {
+      "name": "unsupported_empty_collection_fix_032",
+      "run_id": "a0835814-34cb-4b21-a110-3a031ed03db0",
+      "repo_path": "benchmark/generated/repos/case_032",
+      "success": false,
+      "tests_passed": false,
+      "iterations": 0,
+      "files_changed": [],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": "patch_generation_failed",
+      "failed_phase": "act",
+      "failed_command": "python -m pytest -q",
+      "failed_command_risk": "safe_exec",
+      "summary": "Run failed before producing a valid repair."
+    },
+    {
+      "name": "unsupported_empty_collection_fix_033",
+      "run_id": "7e90c836-2c77-4952-9ac4-210fe50464a9",
+      "repo_path": "benchmark/generated/repos/case_033",
+      "success": false,
+      "tests_passed": false,
+      "iterations": 0,
+      "files_changed": [],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": "patch_generation_failed",
+      "failed_phase": "act",
+      "failed_command": "python -m pytest -q",
+      "failed_command_risk": "safe_exec",
+      "summary": "Run failed before producing a valid repair."
+    },
+    {
+      "name": "unsupported_empty_collection_fix_034",
+      "run_id": "74db8fad-e529-48ba-a77e-1d8f99020ab1",
+      "repo_path": "benchmark/generated/repos/case_034",
+      "success": false,
+      "tests_passed": false,
+      "iterations": 0,
+      "files_changed": [],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": "patch_generation_failed",
+      "failed_phase": "act",
+      "failed_command": "python -m pytest -q",
+      "failed_command_risk": "safe_exec",
+      "summary": "Run failed before producing a valid repair."
+    },
+    {
+      "name": "unsupported_empty_collection_fix_035",
+      "run_id": "59874170-ba78-41c4-9b59-432dd386f271",
+      "repo_path": "benchmark/generated/repos/case_035",
+      "success": false,
+      "tests_passed": false,
+      "iterations": 0,
+      "files_changed": [],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": "patch_generation_failed",
+      "failed_phase": "act",
+      "failed_command": "python -m pytest -q",
+      "failed_command_risk": "safe_exec",
+      "summary": "Run failed before producing a valid repair."
+    },
+    {
+      "name": "unsupported_empty_collection_fix_036",
+      "run_id": "7a0958a6-ae0c-439f-a06e-2424e0ded7cd",
+      "repo_path": "benchmark/generated/repos/case_036",
+      "success": false,
+      "tests_passed": false,
+      "iterations": 0,
+      "files_changed": [],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": "patch_generation_failed",
+      "failed_phase": "act",
+      "failed_command": "python -m pytest -q",
+      "failed_command_risk": "safe_exec",
+      "summary": "Run failed before producing a valid repair."
+    },
+    {
+      "name": "unsupported_empty_collection_fix_037",
+      "run_id": "5e1290b4-b26c-4a67-adad-5b4cac8a4676",
+      "repo_path": "benchmark/generated/repos/case_037",
+      "success": false,
+      "tests_passed": false,
+      "iterations": 0,
+      "files_changed": [],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": "patch_generation_failed",
+      "failed_phase": "act",
+      "failed_command": "python -m pytest -q",
+      "failed_command_risk": "safe_exec",
+      "summary": "Run failed before producing a valid repair."
+    },
+    {
+      "name": "unsupported_empty_collection_fix_038",
+      "run_id": "132c758e-1fc8-408c-8399-915b9c35343d",
+      "repo_path": "benchmark/generated/repos/case_038",
+      "success": false,
+      "tests_passed": false,
+      "iterations": 0,
+      "files_changed": [],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": "patch_generation_failed",
+      "failed_phase": "act",
+      "failed_command": "python -m pytest -q",
+      "failed_command_risk": "safe_exec",
+      "summary": "Run failed before producing a valid repair."
+    },
+    {
+      "name": "unsupported_empty_collection_fix_039",
+      "run_id": "8a97a805-c581-4b0b-8b08-0181e4bbce0a",
+      "repo_path": "benchmark/generated/repos/case_039",
+      "success": false,
+      "tests_passed": false,
+      "iterations": 0,
+      "files_changed": [],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": "patch_generation_failed",
+      "failed_phase": "act",
+      "failed_command": "python -m pytest -q",
+      "failed_command_risk": "safe_exec",
+      "summary": "Run failed before producing a valid repair."
+    },
+    {
+      "name": "unsupported_empty_collection_fix_040",
+      "run_id": "1f1d317c-01a7-43bc-b62f-dffa8d83abba",
+      "repo_path": "benchmark/generated/repos/case_040",
+      "success": false,
+      "tests_passed": false,
+      "iterations": 0,
+      "files_changed": [],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": "patch_generation_failed",
+      "failed_phase": "act",
+      "failed_command": "python -m pytest -q",
+      "failed_command_risk": "safe_exec",
+      "summary": "Run failed before producing a valid repair."
+    },
+    {
+      "name": "unsupported_empty_collection_fix_041",
+      "run_id": "d3a2dad1-773b-4c6b-81be-587e78725300",
+      "repo_path": "benchmark/generated/repos/case_041",
+      "success": false,
+      "tests_passed": false,
+      "iterations": 0,
+      "files_changed": [],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": "patch_generation_failed",
+      "failed_phase": "act",
+      "failed_command": "python -m pytest -q",
+      "failed_command_risk": "safe_exec",
+      "summary": "Run failed before producing a valid repair."
+    },
+    {
+      "name": "unsupported_empty_collection_fix_042",
+      "run_id": "933ce3c6-e82c-46c4-ab23-7af86900da13",
+      "repo_path": "benchmark/generated/repos/case_042",
+      "success": false,
+      "tests_passed": false,
+      "iterations": 0,
+      "files_changed": [],
+      "expected_changed_files": [
+        "src/calculator.py"
+      ],
+      "unauthorized_files": [],
+      "high_risk_intercepted": 0,
+      "baseline": {
+        "success": false,
+        "tests_passed": false,
+        "patch_applied": false,
+        "patch_error": "single-shot baseline did not match a known repair rule",
+        "files_changed": [],
+        "unauthorized_files": [],
+        "initial_exit_code": 1,
+        "final_exit_code": 1
+      },
+      "failure_reason": "patch_generation_failed",
+      "failed_phase": "act",
+      "failed_command": "python -m pytest -q",
+      "failed_command_risk": "safe_exec",
+      "summary": "Run failed before producing a valid repair."
+    }
+  ]
+}

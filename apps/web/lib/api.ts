@@ -114,6 +114,11 @@ export type EvaluationRun = {
   created_at: string;
   result: {
     pass_rate: number;
+    baseline_pass_rate?: number | null;
+    pass_rate_delta?: number | null;
+    high_risk_intercepted_count: number;
+    unauthorized_file_modification_count: number;
+    result_file?: string;
     failure_breakdown: Record<string, number>;
     failed_phase_breakdown: Record<string, number>;
     failed_command_breakdown: Record<string, number>;
@@ -172,6 +177,9 @@ export async function approveAgentRun(runId: string, commandKey: string): Promis
 export async function createEvaluation(input: {
   name: string;
   casesPath?: string;
+  runBaseline?: boolean;
+  autoApproveHighRisk?: boolean;
+  writeResultFile?: boolean;
   cases?: Array<{
     name: string;
     repo_path: string;
@@ -186,6 +194,9 @@ export async function createEvaluation(input: {
     body: JSON.stringify({
       name: input.name,
       cases_path: input.casesPath,
+      run_baseline: input.runBaseline ?? true,
+      auto_approve_high_risk: input.autoApproveHighRisk ?? true,
+      write_result_file: input.writeResultFile ?? true,
       cases: input.cases ?? []
     }),
     cache: "no-store"

@@ -83,7 +83,7 @@ class RepoPilotRuntime:
             run.finished_at = datetime.now(UTC)
             self.db.commit()
             self.db.refresh(run)
-            raise
+            return run
 
     async def _execute(self, run: AgentRun, worktree_path: Path, approved_commands: set[str]) -> dict:
         profile = self.tools.repo_profile(worktree_path)

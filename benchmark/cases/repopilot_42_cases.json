@@ -1,0 +1,382 @@
+{
+  "cases": [
+    {
+      "name": "zero_boundary_fix_001",
+      "repo_path": "benchmark/generated/repos/case_001",
+      "task_input": "Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "zero_boundary_fix_002",
+      "repo_path": "benchmark/generated/repos/case_002",
+      "task_input": "Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "zero_boundary_fix_003",
+      "repo_path": "benchmark/generated/repos/case_003",
+      "task_input": "Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "zero_boundary_fix_004",
+      "repo_path": "benchmark/generated/repos/case_004",
+      "task_input": "Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "zero_boundary_fix_005",
+      "repo_path": "benchmark/generated/repos/case_005",
+      "task_input": "Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "zero_boundary_fix_006",
+      "repo_path": "benchmark/generated/repos/case_006",
+      "task_input": "Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "zero_boundary_fix_007",
+      "repo_path": "benchmark/generated/repos/case_007",
+      "task_input": "Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "zero_boundary_fix_008",
+      "repo_path": "benchmark/generated/repos/case_008",
+      "task_input": "Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "zero_boundary_fix_009",
+      "repo_path": "benchmark/generated/repos/case_009",
+      "task_input": "Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "zero_boundary_fix_010",
+      "repo_path": "benchmark/generated/repos/case_010",
+      "task_input": "Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "zero_boundary_fix_011",
+      "repo_path": "benchmark/generated/repos/case_011",
+      "task_input": "Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "zero_boundary_fix_012",
+      "repo_path": "benchmark/generated/repos/case_012",
+      "task_input": "Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "zero_boundary_fix_013",
+      "repo_path": "benchmark/generated/repos/case_013",
+      "task_input": "Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "zero_boundary_fix_014",
+      "repo_path": "benchmark/generated/repos/case_014",
+      "task_input": "Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "zero_boundary_fix_015",
+      "repo_path": "benchmark/generated/repos/case_015",
+      "task_input": "Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "zero_boundary_fix_016",
+      "repo_path": "benchmark/generated/repos/case_016",
+      "task_input": "Install dependencies if needed, then Fix the failing boundary check so zero raises ValueError and keep the diff minimal.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "percent_upper_bound_fix_017",
+      "repo_path": "benchmark/generated/repos/case_017",
+      "task_input": "Install dependencies if needed, then Fix the missing upper bound so percentages above 100 raise ValueError.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "percent_upper_bound_fix_018",
+      "repo_path": "benchmark/generated/repos/case_018",
+      "task_input": "Fix the missing upper bound so percentages above 100 raise ValueError.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "percent_upper_bound_fix_019",
+      "repo_path": "benchmark/generated/repos/case_019",
+      "task_input": "Fix the missing upper bound so percentages above 100 raise ValueError.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "percent_upper_bound_fix_020",
+      "repo_path": "benchmark/generated/repos/case_020",
+      "task_input": "Fix the missing upper bound so percentages above 100 raise ValueError.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "percent_upper_bound_fix_021",
+      "repo_path": "benchmark/generated/repos/case_021",
+      "task_input": "Fix the missing upper bound so percentages above 100 raise ValueError.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "percent_upper_bound_fix_022",
+      "repo_path": "benchmark/generated/repos/case_022",
+      "task_input": "Fix the missing upper bound so percentages above 100 raise ValueError.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "percent_upper_bound_fix_023",
+      "repo_path": "benchmark/generated/repos/case_023",
+      "task_input": "Fix the missing upper bound so percentages above 100 raise ValueError.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "percent_upper_bound_fix_024",
+      "repo_path": "benchmark/generated/repos/case_024",
+      "task_input": "Fix the missing upper bound so percentages above 100 raise ValueError.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "percent_upper_bound_fix_025",
+      "repo_path": "benchmark/generated/repos/case_025",
+      "task_input": "Fix the missing upper bound so percentages above 100 raise ValueError.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "percent_upper_bound_fix_026",
+      "repo_path": "benchmark/generated/repos/case_026",
+      "task_input": "Fix the missing upper bound so percentages above 100 raise ValueError.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "percent_upper_bound_fix_027",
+      "repo_path": "benchmark/generated/repos/case_027",
+      "task_input": "Fix the missing upper bound so percentages above 100 raise ValueError.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "unsupported_empty_collection_fix_028",
+      "repo_path": "benchmark/generated/repos/case_028",
+      "task_input": "Fix empty list handling so first_item raises ValueError instead of returning None.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "unsupported_empty_collection_fix_029",
+      "repo_path": "benchmark/generated/repos/case_029",
+      "task_input": "Fix empty list handling so first_item raises ValueError instead of returning None.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "unsupported_empty_collection_fix_030",
+      "repo_path": "benchmark/generated/repos/case_030",
+      "task_input": "Fix empty list handling so first_item raises ValueError instead of returning None.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "unsupported_empty_collection_fix_031",
+      "repo_path": "benchmark/generated/repos/case_031",
+      "task_input": "Fix empty list handling so first_item raises ValueError instead of returning None.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "unsupported_empty_collection_fix_032",
+      "repo_path": "benchmark/generated/repos/case_032",
+      "task_input": "Fix empty list handling so first_item raises ValueError instead of returning None.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "unsupported_empty_collection_fix_033",
+      "repo_path": "benchmark/generated/repos/case_033",
+      "task_input": "Fix empty list handling so first_item raises ValueError instead of returning None.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "unsupported_empty_collection_fix_034",
+      "repo_path": "benchmark/generated/repos/case_034",
+      "task_input": "Fix empty list handling so first_item raises ValueError instead of returning None.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "unsupported_empty_collection_fix_035",
+      "repo_path": "benchmark/generated/repos/case_035",
+      "task_input": "Fix empty list handling so first_item raises ValueError instead of returning None.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "unsupported_empty_collection_fix_036",
+      "repo_path": "benchmark/generated/repos/case_036",
+      "task_input": "Fix empty list handling so first_item raises ValueError instead of returning None.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "unsupported_empty_collection_fix_037",
+      "repo_path": "benchmark/generated/repos/case_037",
+      "task_input": "Fix empty list handling so first_item raises ValueError instead of returning None.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "unsupported_empty_collection_fix_038",
+      "repo_path": "benchmark/generated/repos/case_038",
+      "task_input": "Fix empty list handling so first_item raises ValueError instead of returning None.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "unsupported_empty_collection_fix_039",
+      "repo_path": "benchmark/generated/repos/case_039",
+      "task_input": "Fix empty list handling so first_item raises ValueError instead of returning None.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "unsupported_empty_collection_fix_040",
+      "repo_path": "benchmark/generated/repos/case_040",
+      "task_input": "Fix empty list handling so first_item raises ValueError instead of returning None.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "unsupported_empty_collection_fix_041",
+      "repo_path": "benchmark/generated/repos/case_041",
+      "task_input": "Fix empty list handling so first_item raises ValueError instead of returning None.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    },
+    {
+      "name": "unsupported_empty_collection_fix_042",
+      "repo_path": "benchmark/generated/repos/case_042",
+      "task_input": "Fix empty list handling so first_item raises ValueError instead of returning None.",
+      "base_ref": "HEAD",
+      "expected_changed_files": [
+        "src/calculator.py"
+      ]
+    }
+  ]
+}
