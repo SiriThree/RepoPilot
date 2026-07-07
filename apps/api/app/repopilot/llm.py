@@ -20,7 +20,7 @@ class RepoPilotLLM:
         search_results: dict[str, Any] | None = None,
         test_command: str | None = None,
     ) -> dict[str, Any]:
-        if not self.settings.openai_api_key:
+        if self.settings.force_llm_fallback or not self.settings.openai_api_key:
             candidate = next((path for path in source_files if path.endswith("calculator.py")), source_files[0] if source_files else "")
             suspected_files = [candidate] if candidate else []
             if "update tests" in task_input.lower():
@@ -64,7 +64,7 @@ class RepoPilotLLM:
         issue_text: str | None = None,
         search_results: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
-        if not self.settings.openai_api_key:
+        if self.settings.force_llm_fallback or not self.settings.openai_api_key:
             primary = file_bundle[0] if file_bundle else {"path": "", "content": ""}
             if "if value < 0:" in primary["content"] and ("zero" in task_input.lower() or "boundary" in task_input.lower()):
                 patches = [

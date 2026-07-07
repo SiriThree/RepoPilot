@@ -155,7 +155,7 @@ class RepoTools:
             raise ValueError("Unified diff is empty")
         start = time.perf_counter()
         completed = subprocess.run(
-            ["git", "apply", "--whitespace=nowarn", "-"],
+            ["git", "apply", "--recount", "--whitespace=nowarn", "-"],
             cwd=repo_path,
             input=unified_diff,
             capture_output=True,
@@ -167,7 +167,7 @@ class RepoTools:
         if completed.returncode != 0:
             raise ValueError(f"git apply failed: {completed.stderr.strip() or completed.stdout.strip()}")
         return {
-            "command": "git apply --whitespace=nowarn -",
+            "command": "git apply --recount --whitespace=nowarn -",
             "risk_level": "guarded_write",
             "approval_status": "auto_approved",
             "exit_code": completed.returncode,
