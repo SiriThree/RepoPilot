@@ -9,7 +9,11 @@
       "ground_truth_pr": "https://github.com/owner/project/pull/456",
       "ground_truth_commit": "abcdef1234567890abcdef1234567890abcdef12",
       "base_ref": "0123456789abcdef0123456789abcdef01234567",
+      "setup_commands": [
+        "python -m pip install -e ."
+      ],
       "test_command": "python -m pytest tests/test_specific_failure.py -q",
+      "test_patch": "diff --git a/tests/test_specific_failure.py b/tests/test_specific_failure.py\nnew file mode 100644\n--- /dev/null\n+++ b/tests/test_specific_failure.py\n@@ -0,0 +1,5 @@\n+from package.module import function\n+\n+\n+def test_regression_behavior():\n+    assert function('input') == 'expected'\n",
       "expected_changed_files": [
         "src/package/module.py"
       ]

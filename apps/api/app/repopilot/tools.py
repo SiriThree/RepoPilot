@@ -176,6 +176,52 @@ class RepoTools:
             "duration_ms": duration_ms,
         }
 
+    def apply_test_patch(self, repo_path: Path, unified_diff: str) -> dict:
+        patch_result = self.apply_unified_diff(repo_path, unified_diff)
+        subprocess.run(
+            ["git", "config", "user.email", "benchmark@example.com"],
+            cwd=repo_path,
+            check=False,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        )
+        subprocess.run(
+            ["git", "config", "user.name", "RepoPilot Benchmark"],
+            cwd=repo_path,
+            check=False,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        )
+        subprocess.run(
+            ["git", "add", "."],
+            cwd=repo_path,
+            check=True,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        )
+        completed = subprocess.run(
+            ["git", "commit", "-m", "apply benchmark test patch"],
+            cwd=repo_path,
+            check=False,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        )
+        return {
+            **patch_result,
+            "command": "git apply test patch && git commit",
+            "stdout": completed.stdout,
+            "stderr": completed.stderr,
+            "exit_code": completed.returncode,
+        }
+
     def run_tests(self, repo_path: Path, test_command: str | None = None) -> dict:
         python_path = str(repo_path)
         existing = os.environ.get("PYTHONPATH", "")
@@ -188,6 +234,13 @@ class RepoTools:
             return shlex.split(test_command, posix=os.name != "nt")
         except ValueError as exc:
             raise ValueError(f"Invalid test command: {test_command}") from exc
+
+    def run_command(self, repo_path: Path, command: str, approved_commands: set[str] | None = None) -> dict:
+        try:
+            parsed = shlex.split(command, posix=os.name != "nt")
+        except ValueError as exc:
+            raise ValueError(f"Invalid command: {command}") from exc
+        return self.runner.run(parsed, cwd=repo_path, approved_commands=approved_commands, command_key=command)
 
     def git_diff(self, repo_path: Path) -> dict:
         return self.runner.run(["git", "diff", "--", "."], cwd=repo_path)

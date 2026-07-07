@@ -28,7 +28,9 @@ class RepoPilotRuntime:
             repo_path=run.repo_path,
             task_input=run.task_input,
             base_ref=run.base_ref,
+            setup_commands=run.result.get("setup_commands", []),
             test_command=run.result.get("test_command"),
+            test_patch=run.result.get("test_patch"),
             issue_text=run.result.get("issue_text"),
             issue_url=run.result.get("issue_url"),
             ground_truth_pr=run.result.get("ground_truth_pr"),
@@ -92,6 +94,20 @@ class RepoPilotRuntime:
 
     async def _execute(self, run: AgentRun, worktree_path: Path, payload: AgentRunRequest, approved_commands: set[str]) -> dict:
         profile = self.tools.repo_profile(worktree_path)
+        if payload.test_patch:
+            test_patch_result = self.tools.apply_test_patch(worktree_path, payload.test_patch)
+            self._record_command(run, test_patch_result)
+            self._record_step(
+                run,
+                "setup",
+                "apply_test_patch",
+                {"has_test_patch": True},
+                {"committed": test_patch_result["exit_code"] == 0},
+            )
+            profile = self.tools.repo_profile(worktree_path)
+        setup_result = self._run_setup_commands(run, worktree_path, payload, approved_commands)
+        if setup_result:
+            return setup_result
         self._record_step(run, "plan", "repo_profile", {"repo_path": run.repo_path}, profile)
         issue_context = "\n\n".join(item for item in [payload.task_input, payload.issue_text or ""] if item)
         search_results = self.tools.search_issue_terms(worktree_path, issue_context)
@@ -317,10 +333,62 @@ class RepoPilotRuntime:
             return self.tools.install_dependencies(worktree_path, approved_commands)
         return None
 
+    def _run_setup_commands(
+        self,
+        run: AgentRun,
+        worktree_path: Path,
+        payload: AgentRunRequest,
+        approved_commands: set[str],
+    ) -> dict | None:
+        for command in payload.setup_commands:
+            result = self.tools.run_command(worktree_path, command, approved_commands)
+            self._record_command(run, result)
+            if result["approval_status"] == "pending":
+                self._record_step(
+                    run,
+                    "approval",
+                    "request_setup_command",
+                    {"command": command},
+                    {
+                        "command": result["command"],
+                        "command_key": result["command_key"],
+                        "reason": "Setup command requires explicit approval.",
+                    },
+                )
+                return {
+                    "status": "awaiting_approval",
+                    "tests_passed": False,
+                    "files_changed": [],
+                    "iterations": 0,
+                    "summary": "Run paused because RepoPilot needs approval for a setup command.",
+                    "approved_commands": sorted(approved_commands),
+                    "pending_approval": {
+                        "command": result["command"],
+                        "command_key": result["command_key"],
+                        "risk_level": result["risk_level"],
+                        "reason": "Setup command requires explicit approval.",
+                    },
+                    "profile": self.tools.repo_profile(worktree_path),
+                    "plan": None,
+                    "patch_plan": None,
+                    "patch_proposal": None,
+                    "initial_test": {"passed": False, "error_excerpt": "Awaiting setup approval.", "duration_ms": 0},
+                    "final_test": {"passed": False, "error_excerpt": "Awaiting setup approval.", "duration_ms": 0},
+                    "diff_text": "",
+                    "diff_stats": {"added_lines": 0, "removed_lines": 0, "hunks": 0},
+                    "failure_reason": "pending_approval",
+                    **self._metadata(payload),
+                }
+            if result["exit_code"] != 0:
+                raise ValueError(f"Setup command failed: {command}")
+        return None
+
     def _metadata(self, payload: AgentRunRequest) -> dict:
         return {
             "repo_url": payload.repo_url,
+            "setup_commands": payload.setup_commands,
             "test_command": payload.test_command or "python -m pytest -q",
+            "test_patch": payload.test_patch,
             "issue_text": payload.issue_text,
             "issue_url": payload.issue_url,
             "ground_truth_pr": payload.ground_truth_pr,

@@ -69,6 +69,8 @@ export type AgentRun = {
     failure_reason?: string | null;
     repo_url?: string | null;
     test_command?: string | null;
+    setup_commands?: string[];
+    test_patch?: string | null;
     issue_text?: string | null;
     issue_url?: string | null;
     ground_truth_pr?: string | null;
@@ -140,6 +142,8 @@ export async function createAgentRun(input: {
   taskInput: string;
   baseRef?: string;
   testCommand?: string;
+  setupCommands?: string[];
+  testPatch?: string;
   issueText?: string;
   issueUrl?: string;
   groundTruthPr?: string;
@@ -154,6 +158,8 @@ export async function createAgentRun(input: {
       task_input: input.taskInput,
       base_ref: input.baseRef ?? "HEAD",
       test_command: input.testCommand || null,
+      setup_commands: input.setupCommands ?? [],
+      test_patch: input.testPatch || null,
       issue_text: input.issueText || null,
       issue_url: input.issueUrl || null,
       ground_truth_pr: input.groundTruthPr || null,

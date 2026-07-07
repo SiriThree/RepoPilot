@@ -62,7 +62,9 @@ For real issue validation, use cases with `repo_url` instead of `repo_path`:
   "name": "real_issue_case",
   "repo_url": "https://github.com/owner/project.git",
   "base_ref": "fixed-base-commit-sha",
+  "setup_commands": ["python -m pip install -e ."],
   "test_command": "python -m pytest tests/test_specific_failure.py -q",
+  "test_patch": "optional unified diff that adds the regression test before repair",
   "task_input": "Fix the linked issue while keeping the diff minimal.",
   "issue_text": "Issue body, stack trace, expected behavior, and relevant symbols.",
   "issue_url": "https://github.com/owner/project/issues/123",
@@ -72,6 +74,6 @@ For real issue validation, use cases with `repo_url` instead of `repo_path`:
 }
 ```
 
-RepoPilot will clone or update the repository under `.repopilot/repos`, create a detached worktree at `base_ref`, run `test_command`, search issue terms, ask the LLM for a patch plan, prefer unified diff application through `git apply`, and record issue/ground-truth metadata in the benchmark result.
+RepoPilot will clone or update the repository under `.repopilot/repos`, create a detached worktree at `base_ref`, optionally apply and commit `test_patch`, run approved `setup_commands`, run `test_command`, search issue terms, ask the LLM for a patch plan, prefer unified diff application through `git apply`, and record issue/ground-truth metadata in the benchmark result.
 
 The file `benchmark/cases/real_issues.example.json` is a template for this format. Replace it with selected low-to-medium complexity Python issues when building a real-world smoke benchmark.

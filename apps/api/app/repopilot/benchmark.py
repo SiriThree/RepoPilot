@@ -23,6 +23,21 @@ class SingleShotBaseline:
     def execute(self, case: BenchmarkCase) -> dict:
         repo_path = self.repo_manager.prepare_repo(case.repo_path, case.repo_url)
         worktree_path = self.repo_manager.create_worktree(repo_path, f"baseline-{uuid4()}", case.base_ref)
+        if case.test_patch:
+            self.tools.apply_test_patch(worktree_path, case.test_patch)
+        for command in case.setup_commands:
+            result = self.tools.run_command(worktree_path, command, set(case.setup_commands))
+            if result["exit_code"] != 0:
+                return {
+                    "success": False,
+                    "tests_passed": False,
+                    "patch_applied": False,
+                    "patch_error": f"setup command failed: {command}",
+                    "files_changed": [],
+                    "unauthorized_files": [],
+                    "initial_exit_code": None,
+                    "final_exit_code": None,
+                }
         initial_test = self.tools.run_tests(worktree_path, case.test_command)
         patch_applied = False
         patch_error = ""
@@ -112,7 +127,9 @@ class BenchmarkRunner:
                     repo_url=case.repo_url,
                     task_input=case.task_input,
                     base_ref=case.base_ref,
+                    setup_commands=case.setup_commands,
                     test_command=case.test_command,
+                    test_patch=case.test_patch,
                     issue_text=case.issue_text,
                     issue_url=case.issue_url,
                     ground_truth_pr=case.ground_truth_pr,
@@ -121,11 +138,12 @@ class BenchmarkRunner:
             )
             intercepted_for_case = self._count_pending_high_risk(run)
             high_risk_intercepted += intercepted_for_case
-            if run.status == "awaiting_approval" and payload.auto_approve_high_risk:
+            while run.status == "awaiting_approval" and payload.auto_approve_high_risk:
                 pending = run.result.get("pending_approval") or {}
                 command_key = pending.get("command_key")
-                if command_key:
-                    run = await self.runtime.approve_and_resume(run, command_key)
+                if not command_key:
+                    break
+                run = await self.runtime.approve_and_resume(run, command_key)
 
             success = bool(run.result.get("tests_passed"))
             changed_files = run.result.get("files_changed", [])
@@ -152,6 +170,8 @@ class BenchmarkRunner:
                     "repo_url": case.repo_url,
                     "base_ref": case.base_ref,
                     "test_command": case.test_command or "python -m pytest -q",
+                    "setup_commands": case.setup_commands,
+                    "has_test_patch": bool(case.test_patch),
                     "issue_url": case.issue_url,
                     "ground_truth_pr": case.ground_truth_pr,
                     "ground_truth_commit": case.ground_truth_commit,
