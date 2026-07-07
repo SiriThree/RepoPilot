@@ -1,0 +1,11 @@
+{
+  "cases": [
+    {
+      "name": "python_boundary_fix",
+      "repo_path": "D:\\repos\\example-python-service",
+      "task_input": "Fix the failing boundary check so zero raises ValueError and keep the diff minimal.",
+      "base_ref": "HEAD",
+      "expected_changed_files": ["src/calculator.py"]
+    }
+  ]
+}
