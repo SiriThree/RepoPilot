@@ -21,9 +21,9 @@ class SingleShotBaseline:
         self.tools = RepoTools()
 
     def execute(self, case: BenchmarkCase) -> dict:
-        repo_path = self.repo_manager.ensure_repo(case.repo_path)
+        repo_path = self.repo_manager.prepare_repo(case.repo_path, case.repo_url)
         worktree_path = self.repo_manager.create_worktree(repo_path, f"baseline-{uuid4()}", case.base_ref)
-        initial_test = self.tools.run_tests(worktree_path)
+        initial_test = self.tools.run_tests(worktree_path, case.test_command)
         patch_applied = False
         patch_error = ""
 
@@ -39,7 +39,7 @@ class SingleShotBaseline:
             except Exception as exc:
                 patch_error = str(exc)
 
-        final_test = self.tools.run_tests(worktree_path)
+        final_test = self.tools.run_tests(worktree_path, case.test_command)
         diff_result = self.tools.git_diff(worktree_path)
         changed_files = self._extract_changed_files(diff_result["stdout"])
         unauthorized_files = self._unauthorized_files(changed_files, case.expected_changed_files)
@@ -107,7 +107,17 @@ class BenchmarkRunner:
             baseline_passed += int(bool(baseline_result and baseline_result["success"]))
 
             run = await self.runtime.create_and_execute(
-                AgentRunRequest(repo_path=case.repo_path, task_input=case.task_input, base_ref=case.base_ref)
+                AgentRunRequest(
+                    repo_path=case.repo_path,
+                    repo_url=case.repo_url,
+                    task_input=case.task_input,
+                    base_ref=case.base_ref,
+                    test_command=case.test_command,
+                    issue_text=case.issue_text,
+                    issue_url=case.issue_url,
+                    ground_truth_pr=case.ground_truth_pr,
+                    ground_truth_commit=case.ground_truth_commit,
+                )
             )
             intercepted_for_case = self._count_pending_high_risk(run)
             high_risk_intercepted += intercepted_for_case
@@ -139,6 +149,12 @@ class BenchmarkRunner:
                     "name": case.name,
                     "run_id": run.id,
                     "repo_path": self._display_path(case.repo_path),
+                    "repo_url": case.repo_url,
+                    "base_ref": case.base_ref,
+                    "test_command": case.test_command or "python -m pytest -q",
+                    "issue_url": case.issue_url,
+                    "ground_truth_pr": case.ground_truth_pr,
+                    "ground_truth_commit": case.ground_truth_commit,
                     "success": case_passed,
                     "tests_passed": success,
                     "iterations": run.result.get("iterations", 0),
@@ -204,12 +220,16 @@ class BenchmarkRunner:
         return [self._resolve_case(BenchmarkCase(**case)) for case in payload["cases"]]
 
     def _resolve_case(self, case: BenchmarkCase) -> BenchmarkCase:
+        if case.repo_url:
+            return case
         path = Path(case.repo_path)
         if not path.is_absolute():
             case.repo_path = str((self.project_root / path).resolve())
         return case
 
     def _display_path(self, path_value: str) -> str:
+        if not path_value:
+            return ""
         path = Path(path_value)
         try:
             return path.relative_to(self.project_root).as_posix()

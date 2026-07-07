@@ -28,12 +28,17 @@ class RepoPilotRuntime:
             repo_path=run.repo_path,
             task_input=run.task_input,
             base_ref=run.base_ref,
+            test_command=run.result.get("test_command"),
+            issue_text=run.result.get("issue_text"),
+            issue_url=run.result.get("issue_url"),
+            ground_truth_pr=run.result.get("ground_truth_pr"),
+            ground_truth_commit=run.result.get("ground_truth_commit"),
             approved_commands=approved,
         )
         return await self._resume_run(run, payload)
 
     async def _start_run(self, payload: AgentRunRequest) -> AgentRun:
-        repo_path = self.repo_manager.ensure_repo(payload.repo_path)
+        repo_path = self.repo_manager.prepare_repo(payload.repo_path, payload.repo_url)
         run = AgentRun(
             repo_path=str(repo_path),
             task_input=payload.task_input,
@@ -49,21 +54,21 @@ class RepoPilotRuntime:
         run.worktree_path = str(worktree_path)
         self.db.commit()
 
-        return await self._execute_and_persist(run, worktree_path, payload.approved_commands)
+        return await self._execute_and_persist(run, worktree_path, payload)
 
     async def _resume_run(self, run: AgentRun, payload: AgentRunRequest) -> AgentRun:
-        repo_path = self.repo_manager.ensure_repo(run.repo_path)
+        repo_path = self.repo_manager.prepare_repo(run.repo_path, payload.repo_url)
         worktree_path = self.repo_manager.create_worktree(repo_path, run.id, run.base_ref)
         run.worktree_path = str(worktree_path)
         run.status = "running"
         run.steps.clear()
         run.command_events.clear()
         self.db.commit()
-        return await self._execute_and_persist(run, worktree_path, payload.approved_commands)
+        return await self._execute_and_persist(run, worktree_path, payload)
 
-    async def _execute_and_persist(self, run: AgentRun, worktree_path: Path, approved_commands: list[str]) -> AgentRun:
+    async def _execute_and_persist(self, run: AgentRun, worktree_path: Path, payload: AgentRunRequest) -> AgentRun:
         try:
-            result = await self._execute(run, worktree_path, set(approved_commands))
+            result = await self._execute(run, worktree_path, payload, set(payload.approved_commands))
             run.status = result["status"]
             run.summary = result["summary"]
             run.result = result
@@ -85,10 +90,20 @@ class RepoPilotRuntime:
             self.db.refresh(run)
             return run
 
-    async def _execute(self, run: AgentRun, worktree_path: Path, approved_commands: set[str]) -> dict:
+    async def _execute(self, run: AgentRun, worktree_path: Path, payload: AgentRunRequest, approved_commands: set[str]) -> dict:
         profile = self.tools.repo_profile(worktree_path)
         self._record_step(run, "plan", "repo_profile", {"repo_path": run.repo_path}, profile)
-        plan = await self.llm.plan(run.task_input, profile, list_source_files(worktree_path))
+        issue_context = "\n\n".join(item for item in [payload.task_input, payload.issue_text or ""] if item)
+        search_results = self.tools.search_issue_terms(worktree_path, issue_context)
+        self._record_step(run, "plan", "search_issue_terms", {"issue_context": issue_context[:1000]}, search_results)
+        plan = await self.llm.plan(
+            run.task_input,
+            profile,
+            list_source_files(worktree_path),
+            issue_text=payload.issue_text,
+            search_results=search_results,
+            test_command=payload.test_command,
+        )
         self._record_step(run, "plan", "planner", {"task_input": run.task_input}, plan)
 
         environment_event = self._maybe_prepare_environment(run.task_input, worktree_path, approved_commands)
@@ -128,9 +143,10 @@ class RepoPilotRuntime:
                     "diff_text": "",
                     "diff_stats": {"added_lines": 0, "removed_lines": 0, "hunks": 0},
                     "failure_reason": "pending_approval",
+                    **self._metadata(payload),
                 }
 
-        test_result = self.tools.run_tests(worktree_path)
+        test_result = self.tools.run_tests(worktree_path, payload.test_command)
         self._record_command(run, test_result)
         initial_observation = self._summarize_test_result(test_result)
         self._record_step(run, "observe", "run_tests", {}, initial_observation)
@@ -152,21 +168,33 @@ class RepoPilotRuntime:
         iterations = 1
         patch_plan: dict | None = None
         if test_result["exit_code"] != 0:
-            patch_plan = await self._repair_candidate(run.task_input, file_bundle, initial_observation)
+            patch_plan = await self._repair_candidate(
+                run.task_input,
+                file_bundle,
+                initial_observation,
+                issue_text=payload.issue_text,
+                search_results=search_results,
+            )
             self._record_step(run, "repair", "patch_plan", {"files": candidate_files}, patch_plan)
             applied = []
-            for patch in patch_plan["patches"]:
-                patch_result = self.tools.apply_patch(
-                    worktree_path,
-                    patch["path"],
-                    patch["old_snippet"],
-                    patch["new_snippet"],
-                )
+            if patch_plan.get("unified_diff"):
+                patch_result = self.tools.apply_unified_diff(worktree_path, patch_plan["unified_diff"])
                 applied.append(patch_result)
-                self._record_step(run, "repair", "apply_patch", {"path": patch["path"]}, patch_result)
+                self._record_command(run, patch_result)
+                self._record_step(run, "repair", "apply_unified_diff", {"format": "unified_diff"}, {"applied": True})
+            else:
+                for patch in patch_plan["patches"]:
+                    patch_result = self.tools.apply_patch(
+                        worktree_path,
+                        patch["path"],
+                        patch["old_snippet"],
+                        patch["new_snippet"],
+                    )
+                    applied.append(patch_result)
+                    self._record_step(run, "repair", "apply_patch", {"path": patch["path"]}, patch_result)
             iterations += 1
 
-        second_test = self.tools.run_tests(worktree_path)
+        second_test = self.tools.run_tests(worktree_path, payload.test_command)
         self._record_command(run, second_test)
         final_observation = self._summarize_test_result(second_test)
         self._record_step(run, "observe", "run_tests", {"iteration": 2}, final_observation)
@@ -200,6 +228,7 @@ class RepoPilotRuntime:
             "diff_text": diff_result["stdout"],
             "diff_stats": diff_stats,
             "failure_reason": None if second_test["exit_code"] == 0 else self._classify_failure(final_observation["error_excerpt"]),
+            **self._metadata(payload),
         }
 
     def _select_candidate_files(self, worktree_path: Path, plan: dict[str, object]) -> list[str]:
@@ -216,10 +245,23 @@ class RepoPilotRuntime:
             raise ValueError("No Python source file found for repair")
         return [str(fallback[0].relative_to(worktree_path))]
 
-    async def _repair_candidate(self, task_input: str, file_bundle: list[dict[str, str]], observation: dict) -> dict:
-        patch_plan = await self.llm.generate_patch_plan(task_input, file_bundle, observation)
+    async def _repair_candidate(
+        self,
+        task_input: str,
+        file_bundle: list[dict[str, str]],
+        observation: dict,
+        issue_text: str | None = None,
+        search_results: dict | None = None,
+    ) -> dict:
+        patch_plan = await self.llm.generate_patch_plan(
+            task_input,
+            file_bundle,
+            observation,
+            issue_text=issue_text,
+            search_results=search_results,
+        )
         patches = patch_plan.get("patches", [])
-        if not patches:
+        if not patches and not patch_plan.get("unified_diff"):
             raise ValueError("Patch proposal is incomplete")
         return patch_plan
 
@@ -274,6 +316,16 @@ class RepoPilotRuntime:
         if any(keyword in task_input.lower() for keyword in keywords):
             return self.tools.install_dependencies(worktree_path, approved_commands)
         return None
+
+    def _metadata(self, payload: AgentRunRequest) -> dict:
+        return {
+            "repo_url": payload.repo_url,
+            "test_command": payload.test_command or "python -m pytest -q",
+            "issue_text": payload.issue_text,
+            "issue_url": payload.issue_url,
+            "ground_truth_pr": payload.ground_truth_pr,
+            "ground_truth_commit": payload.ground_truth_commit,
+        }
 
     def _record_step(self, run: AgentRun, phase: str, tool_name: str, input_json: dict, output_json: dict) -> None:
         step = RunStep(

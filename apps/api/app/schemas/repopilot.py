@@ -5,16 +5,28 @@ from pydantic import BaseModel, Field
 
 
 class AgentRunRequest(BaseModel):
-    repo_path: str = Field(min_length=1)
+    repo_path: str = ""
+    repo_url: str | None = None
     task_input: str = Field(min_length=8, examples=["Fix the failing boundary check in parser and update tests."])
     base_ref: str = Field(default="HEAD")
+    test_command: str | None = None
+    issue_text: str | None = None
+    issue_url: str | None = None
+    ground_truth_pr: str | None = None
+    ground_truth_commit: str | None = None
     approved_commands: list[str] = Field(default_factory=list)
 
 
 class BenchmarkCase(BaseModel):
-    repo_path: str
+    repo_path: str = ""
+    repo_url: str | None = None
     task_input: str
     base_ref: str = "HEAD"
+    test_command: str | None = None
+    issue_text: str | None = None
+    issue_url: str | None = None
+    ground_truth_pr: str | None = None
+    ground_truth_commit: str | None = None
     expected_changed_files: list[str] = Field(default_factory=list)
     name: str = "unnamed_case"
 

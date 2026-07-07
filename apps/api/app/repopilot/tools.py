@@ -1,4 +1,6 @@
 import os
+import re
+import shlex
 import shutil
 import subprocess
 import time
@@ -14,8 +16,12 @@ class CommandRunner:
         if not command:
             return "blocked"
         head = command[0]
+        if head == "git" and len(command) > 1 and command[1] == "apply":
+            return "guarded_write"
         if head == "python" and len(command) > 2 and command[1] == "-m" and command[2] == "pip":
             return "high_risk"
+        if head == "git" and len(command) > 1 and command[1] not in {"diff", "status", "show", "ls-files", "grep"}:
+            return "blocked"
         if head in self.SAFE_READ:
             return "safe_read"
         if head in self.SAFE_EXEC:
@@ -103,6 +109,31 @@ class RepoTools:
                         break
         return {"matches": matches, "command_event": None}
 
+    def search_issue_terms(self, repo_path: Path, text: str, limit: int = 5) -> dict:
+        terms = self.extract_search_terms(text)
+        searches = []
+        for term in terms[:limit]:
+            result = self.search_code(repo_path, term)
+            searches.append({"term": term, "matches": result["matches"][:10]})
+        return {"terms": terms[:limit], "searches": searches}
+
+    def extract_search_terms(self, text: str) -> list[str]:
+        quoted = re.findall(r"`([^`]+)`", text)
+        identifiers = re.findall(r"\b[a-zA-Z_][a-zA-Z0-9_]{2,}\b", text)
+        stop_words = {
+            "the", "and", "for", "with", "that", "this", "then", "into", "from", "when",
+            "where", "issue", "fix", "failing", "failure", "error", "test", "tests",
+            "should", "raises", "value", "return", "install", "dependencies", "needed",
+        }
+        terms: list[str] = []
+        for term in quoted + identifiers:
+            lowered = term.lower()
+            if lowered in stop_words or len(term) < 3:
+                continue
+            if term not in terms:
+                terms.append(term)
+        return terms
+
     def read_file(self, repo_path: Path, relative_path: str) -> dict:
         path = (repo_path / relative_path).resolve()
         if repo_path.resolve() not in path.parents and path != repo_path.resolve():
@@ -119,11 +150,44 @@ class RepoTools:
         path.write_text(updated, encoding="utf-8")
         return {"path": Path(relative_path).as_posix(), "updated": True}
 
-    def run_tests(self, repo_path: Path) -> dict:
+    def apply_unified_diff(self, repo_path: Path, unified_diff: str) -> dict:
+        if not unified_diff.strip():
+            raise ValueError("Unified diff is empty")
+        start = time.perf_counter()
+        completed = subprocess.run(
+            ["git", "apply", "--whitespace=nowarn", "-"],
+            cwd=repo_path,
+            input=unified_diff,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        )
+        duration_ms = int((time.perf_counter() - start) * 1000)
+        if completed.returncode != 0:
+            raise ValueError(f"git apply failed: {completed.stderr.strip() or completed.stdout.strip()}")
+        return {
+            "command": "git apply --whitespace=nowarn -",
+            "risk_level": "guarded_write",
+            "approval_status": "auto_approved",
+            "exit_code": completed.returncode,
+            "stdout": completed.stdout,
+            "stderr": completed.stderr,
+            "duration_ms": duration_ms,
+        }
+
+    def run_tests(self, repo_path: Path, test_command: str | None = None) -> dict:
         python_path = str(repo_path)
         existing = os.environ.get("PYTHONPATH", "")
         merged = python_path if not existing else os.pathsep.join([python_path, existing])
-        return self.runner.run(["python", "-m", "pytest", "-q"], cwd=repo_path, extra_env={"PYTHONPATH": merged})
+        command = self._parse_test_command(test_command or "python -m pytest -q")
+        return self.runner.run(command, cwd=repo_path, extra_env={"PYTHONPATH": merged})
+
+    def _parse_test_command(self, test_command: str) -> list[str]:
+        try:
+            return shlex.split(test_command, posix=os.name != "nt")
+        except ValueError as exc:
+            raise ValueError(f"Invalid test command: {test_command}") from exc
 
     def git_diff(self, repo_path: Path) -> dict:
         return self.runner.run(["git", "diff", "--", "."], cwd=repo_path)

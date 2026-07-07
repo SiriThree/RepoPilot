@@ -52,3 +52,26 @@ curl -X POST http://localhost:8000/api/evals \
 - **RepoPilot pass rate**: the full Plan-Act-Observe-Repair runtime result, after optional approval resume.
 - **High-risk intercepted count**: pending high-risk command events, such as dependency preparation commands, before approval resume.
 - **Unauthorized file modification count**: cases where final changed files include files outside `expected_changed_files`.
+
+## Real Open-Source Issue Cases
+
+For real issue validation, use cases with `repo_url` instead of `repo_path`:
+
+```json
+{
+  "name": "real_issue_case",
+  "repo_url": "https://github.com/owner/project.git",
+  "base_ref": "fixed-base-commit-sha",
+  "test_command": "python -m pytest tests/test_specific_failure.py -q",
+  "task_input": "Fix the linked issue while keeping the diff minimal.",
+  "issue_text": "Issue body, stack trace, expected behavior, and relevant symbols.",
+  "issue_url": "https://github.com/owner/project/issues/123",
+  "ground_truth_pr": "https://github.com/owner/project/pull/456",
+  "ground_truth_commit": "ground-truth-fix-commit-sha",
+  "expected_changed_files": ["src/package/module.py"]
+}
+```
+
+RepoPilot will clone or update the repository under `.repopilot/repos`, create a detached worktree at `base_ref`, run `test_command`, search issue terms, ask the LLM for a patch plan, prefer unified diff application through `git apply`, and record issue/ground-truth metadata in the benchmark result.
+
+The file `benchmark/cases/real_issues.example.json` is a template for this format. Replace it with selected low-to-medium complexity Python issues when building a real-world smoke benchmark.

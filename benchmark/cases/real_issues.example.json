@@ -1,0 +1,18 @@
+{
+  "cases": [
+    {
+      "name": "example_real_issue_case",
+      "repo_url": "https://github.com/owner/project.git",
+      "task_input": "Fix the behavior described in the linked issue while keeping the diff minimal.",
+      "issue_text": "Paste the issue body or the failing-test description here. Include stack traces, expected behavior, and relevant symbols when available.",
+      "issue_url": "https://github.com/owner/project/issues/123",
+      "ground_truth_pr": "https://github.com/owner/project/pull/456",
+      "ground_truth_commit": "abcdef1234567890abcdef1234567890abcdef12",
+      "base_ref": "0123456789abcdef0123456789abcdef01234567",
+      "test_command": "python -m pytest tests/test_specific_failure.py -q",
+      "expected_changed_files": [
+        "src/package/module.py"
+      ]
+    }
+  ]
+}

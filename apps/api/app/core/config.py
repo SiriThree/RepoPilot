@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     openai_base_url: str = "https://api.openai.com/v1"
     openai_api_key: str = ""
     openai_model: str = "gpt-4.1-mini"
+    clone_base_dir: Path = Path("./.repopilot/repos")
     worktree_base_dir: Path = Path("./.repopilot/worktrees")
     max_repair_iterations: int = 2
     benchmark_dir: Path = Path("../../benchmark/cases")

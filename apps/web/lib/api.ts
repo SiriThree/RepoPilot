@@ -67,6 +67,12 @@ export type AgentRun = {
       reason: string;
     } | null;
     failure_reason?: string | null;
+    repo_url?: string | null;
+    test_command?: string | null;
+    issue_text?: string | null;
+    issue_url?: string | null;
+    ground_truth_pr?: string | null;
+    ground_truth_commit?: string | null;
     profile: {
       file_count: number;
       languages: string[];
@@ -129,17 +135,29 @@ export type EvaluationRun = {
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
 
 export async function createAgentRun(input: {
-  repoPath: string;
+  repoPath?: string;
+  repoUrl?: string;
   taskInput: string;
   baseRef?: string;
+  testCommand?: string;
+  issueText?: string;
+  issueUrl?: string;
+  groundTruthPr?: string;
+  groundTruthCommit?: string;
 }): Promise<AgentRun> {
   const response = await fetch(`${API_BASE_URL}/api/runs`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      repo_path: input.repoPath,
+      repo_path: input.repoPath ?? "",
+      repo_url: input.repoUrl || null,
       task_input: input.taskInput,
-      base_ref: input.baseRef ?? "HEAD"
+      base_ref: input.baseRef ?? "HEAD",
+      test_command: input.testCommand || null,
+      issue_text: input.issueText || null,
+      issue_url: input.issueUrl || null,
+      ground_truth_pr: input.groundTruthPr || null,
+      ground_truth_commit: input.groundTruthCommit || null
     }),
     cache: "no-store"
   });

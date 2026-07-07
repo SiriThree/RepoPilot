@@ -11,7 +11,15 @@ class RepoPilotLLM:
     def __init__(self) -> None:
         self.settings = get_settings()
 
-    async def plan(self, task_input: str, repo_profile: dict[str, Any], source_files: list[str]) -> dict[str, Any]:
+    async def plan(
+        self,
+        task_input: str,
+        repo_profile: dict[str, Any],
+        source_files: list[str],
+        issue_text: str | None = None,
+        search_results: dict[str, Any] | None = None,
+        test_command: str | None = None,
+    ) -> dict[str, Any]:
         if not self.settings.openai_api_key:
             candidate = next((path for path in source_files if path.endswith("calculator.py")), source_files[0] if source_files else "")
             suspected_files = [candidate] if candidate else []
@@ -28,8 +36,11 @@ class RepoPilotLLM:
 
         payload = {
             "task_input": task_input,
+            "issue_text": issue_text,
             "repo_profile": repo_profile,
             "source_files": source_files[:50],
+            "search_results": search_results,
+            "test_command": test_command,
         }
         response = await self._complete_json(
             system=(
@@ -41,7 +52,7 @@ class RepoPilotLLM:
         return {
             "task_type": response.get("task_type", "bugfix"),
             "suspected_files": response.get("suspected_files", []),
-            "test_strategy": response.get("test_strategy", ["python -m pytest -q"]),
+            "test_strategy": response.get("test_strategy", [test_command or "python -m pytest -q"]),
             "reasoning_summary": response.get("reasoning_summary", ""),
         }
 
@@ -50,6 +61,8 @@ class RepoPilotLLM:
         task_input: str,
         file_bundle: list[dict[str, str]],
         observation: dict[str, Any],
+        issue_text: str | None = None,
+        search_results: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         if not self.settings.openai_api_key:
             primary = file_bundle[0] if file_bundle else {"path": "", "content": ""}
@@ -95,18 +108,22 @@ class RepoPilotLLM:
 
         payload = {
             "task_input": task_input,
+            "issue_text": issue_text,
             "file_bundle": file_bundle,
             "observation": observation,
+            "search_results": search_results,
         }
         response = await self._complete_json(
             system=(
                 "You are RepoPilot Patch Planner. Return JSON only with keys: "
-                "patches, reasoning_summary. patches must be an array of objects with keys "
-                "path, old_snippet, new_snippet, reasoning_summary. Keep changes minimal."
+                "unified_diff, patches, reasoning_summary. Prefer unified_diff in standard git diff format "
+                "against the provided files. If you cannot produce a unified diff, patches may be an array "
+                "of objects with keys path, old_snippet, new_snippet, reasoning_summary. Keep changes minimal."
             ),
             user=json.dumps(payload, ensure_ascii=False),
         )
         return {
+            "unified_diff": response.get("unified_diff", ""),
             "patches": response.get("patches", []),
             "reasoning_summary": response.get("reasoning_summary", ""),
         }

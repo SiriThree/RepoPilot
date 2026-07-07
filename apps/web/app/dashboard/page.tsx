@@ -15,6 +15,13 @@ function prettyJson(value: unknown) {
 
 export default function DashboardPage() {
   const [repoPath, setRepoPath] = useState(defaultRepoPath);
+  const [repoUrl, setRepoUrl] = useState("");
+  const [baseRef, setBaseRef] = useState("HEAD");
+  const [testCommand, setTestCommand] = useState("python -m pytest -q");
+  const [issueUrl, setIssueUrl] = useState("");
+  const [issueText, setIssueText] = useState("");
+  const [groundTruthPr, setGroundTruthPr] = useState("");
+  const [groundTruthCommit, setGroundTruthCommit] = useState("");
   const [taskInput, setTaskInput] = useState(defaultTask);
   const [run, setRun] = useState<AgentRun | null>(null);
   const [runs, setRuns] = useState<AgentRun[]>([]);
@@ -33,7 +40,17 @@ export default function DashboardPage() {
     setError("");
     startTransition(async () => {
       try {
-        const nextRun = await createAgentRun({ repoPath, taskInput, baseRef: "HEAD" });
+        const nextRun = await createAgentRun({
+          repoPath,
+          repoUrl,
+          taskInput,
+          baseRef,
+          testCommand,
+          issueText,
+          issueUrl,
+          groundTruthPr,
+          groundTruthCommit
+        });
         setRun(nextRun);
         await refreshRuns();
       } catch {
@@ -88,10 +105,42 @@ export default function DashboardPage() {
             Repository Path
           </label>
           <input id="repo-path" value={repoPath} onChange={(event) => setRepoPath(event.target.value)} />
+          <label className="field-label" htmlFor="repo-url">
+            Repository URL
+          </label>
+          <input id="repo-url" value={repoUrl} onChange={(event) => setRepoUrl(event.target.value)} />
+          <label className="field-label" htmlFor="base-ref">
+            Base Ref
+          </label>
+          <input id="base-ref" value={baseRef} onChange={(event) => setBaseRef(event.target.value)} />
+          <label className="field-label" htmlFor="test-command">
+            Test Command
+          </label>
+          <input id="test-command" value={testCommand} onChange={(event) => setTestCommand(event.target.value)} />
+          <label className="field-label" htmlFor="issue-url">
+            Issue URL
+          </label>
+          <input id="issue-url" value={issueUrl} onChange={(event) => setIssueUrl(event.target.value)} />
           <label className="field-label" htmlFor="task-input">
             Task Input
           </label>
           <textarea id="task-input" value={taskInput} onChange={(event) => setTaskInput(event.target.value)} />
+          <label className="field-label" htmlFor="issue-text">
+            Issue Text
+          </label>
+          <textarea id="issue-text" value={issueText} onChange={(event) => setIssueText(event.target.value)} />
+          <label className="field-label" htmlFor="ground-truth-pr">
+            Ground Truth PR
+          </label>
+          <input id="ground-truth-pr" value={groundTruthPr} onChange={(event) => setGroundTruthPr(event.target.value)} />
+          <label className="field-label" htmlFor="ground-truth-commit">
+            Ground Truth Commit
+          </label>
+          <input
+            id="ground-truth-commit"
+            value={groundTruthCommit}
+            onChange={(event) => setGroundTruthCommit(event.target.value)}
+          />
           <button onClick={submit} disabled={isPending}>
             {isPending ? "RepoPilot 正在执行..." : "启动一次受控修复"}
           </button>
@@ -116,6 +165,11 @@ export default function DashboardPage() {
           <ul className="recommendations">
             <li>任务内容：{run?.task_input ?? "等待输入任务"}</li>
             <li>仓库路径：{run?.repo_path ?? "等待输入仓库路径"}</li>
+            <li>仓库 URL：{run?.result.repo_url ?? "-"}</li>
+            <li>Base Ref：{run?.base_ref ?? "HEAD"}</li>
+            <li>测试命令：{run?.result.test_command ?? "python -m pytest -q"}</li>
+            <li>Issue URL：{run?.result.issue_url ?? "-"}</li>
+            <li>Ground Truth：{run?.result.ground_truth_pr ?? run?.result.ground_truth_commit ?? "-"}</li>
             <li>工作树：{run?.worktree_path ?? "任务运行后生成独立 worktree"}</li>
             <li>运行状态：{run?.status ?? "idle"}</li>
             <li>失败原因：{run?.result.failure_reason ?? "-"}</li>
